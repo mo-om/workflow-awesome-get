@@ -1,0 +1,167 @@
+{
+    "nodes": [
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-6F47C2D6-0971-452E-9C13-4289B8640592", 
+            "nodeName": "jsPlumb-6F47C2D6-0971-452E-9C13-4289B8640592", 
+            "iconCls": "fa-file-o", 
+            "property": {
+                "cluster_address": "hdfs://dev-l002781.app.paic.com.cn:9000", 
+                "hdfs_path": "/tmp/test_spark/sample_tree_data.csv", 
+                "copies": "1", 
+                "splitor": "ctrla"
+            }, 
+            "nodeType": "hdfs-file", 
+            "input": "disable", 
+            "output": "Data", 
+            "indegree": 0, 
+            "parentType": "data-source", 
+            "nodePosTop": 159, 
+            "nodePosLeft": 131
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-E74465BE-9704-4F82-9384-C60054EE6938", 
+            "nodeName": "jsPlumb-E74465BE-9704-4F82-9384-C60054EE6938", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 90, 
+            "nodePosLeft": 372
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-FA753952-3345-4A5E-86E2-05ED99B1B7AA", 
+            "nodeName": "jsPlumb-FA753952-3345-4A5E-86E2-05ED99B1B7AA", 
+            "iconCls": "fa-pencil-square-o", 
+            "property": {
+                "max": "true", 
+                "min": "true", 
+                "mean": "true", 
+                "variance": "true", 
+                "numNonzeros": "false"
+            }, 
+            "nodeType": "statistics", 
+            "input": "Data", 
+            "output": "Statistic", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 223, 
+            "nodePosLeft": 347
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-95F04577-C7A3-409B-95EB-0AE65F1063A2", 
+            "nodeName": "jsPlumb-95F04577-C7A3-409B-95EB-0AE65F1063A2", 
+            "iconCls": "fa-bar-chart", 
+            "property": { }, 
+            "nodeType": "barplot-display", 
+            "input": "Statistic", 
+            "output": "Statistic", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 215, 
+            "nodePosLeft": 576
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-D8FAF870-8359-4305-991D-0B81371C2EA1", 
+            "nodeName": "jsPlumb-D8FAF870-8359-4305-991D-0B81371C2EA1", 
+            "iconCls": "fa-crosshairs", 
+            "property": {
+                "treeType": "Classification", 
+                "targetCol": "0", 
+                "numClasses": "2", 
+                "impurity": "gini", 
+                "maxDepth": "4", 
+                "maxBins": "100", 
+                "categoricalFeaturesInfo": ""
+            }, 
+            "nodeType": "decision-tree", 
+            "input": "Data", 
+            "output": "Tree", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 369, 
+            "nodePosLeft": 232
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-C6293DF9-5B60-4B1A-9BC8-2597AA68AC35", 
+            "nodeName": "jsPlumb-C6293DF9-5B60-4B1A-9BC8-2597AA68AC35", 
+            "iconCls": "fa-sitemap", 
+            "property": { }, 
+            "nodeType": "tree-display", 
+            "input": "Tree", 
+            "output": "Tree", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 367, 
+            "nodePosLeft": 439
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-CDB71D0D-A2D8-4130-A1E6-7218F1FDB92C", 
+            "nodeName": "jsPlumb-CDB71D0D-A2D8-4130-A1E6-7218F1FDB92C", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 361, 
+            "nodePosLeft": 662
+        }
+    ], 
+    "processId": "PROCESS-01AB3C9C-7745-455A-9143-E3AB3376213D", 
+    "processName": "testFlexDecisionTree", 
+    "connections": [
+        {
+            "targetId": "jsPlumb-E74465BE-9704-4F82-9384-C60054EE6938", 
+            "sourceId": "jsPlumb-6F47C2D6-0971-452E-9C13-4289B8640592", 
+            "connectorId": "con_235", 
+            "connectorName": "con_235", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-FA753952-3345-4A5E-86E2-05ED99B1B7AA", 
+            "sourceId": "jsPlumb-6F47C2D6-0971-452E-9C13-4289B8640592", 
+            "connectorId": "con_240", 
+            "connectorName": "con_240", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-95F04577-C7A3-409B-95EB-0AE65F1063A2", 
+            "sourceId": "jsPlumb-FA753952-3345-4A5E-86E2-05ED99B1B7AA", 
+            "connectorId": "con_245", 
+            "connectorName": "con_245", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-D8FAF870-8359-4305-991D-0B81371C2EA1", 
+            "sourceId": "jsPlumb-6F47C2D6-0971-452E-9C13-4289B8640592", 
+            "connectorId": "con_250", 
+            "connectorName": "con_250", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-C6293DF9-5B60-4B1A-9BC8-2597AA68AC35", 
+            "sourceId": "jsPlumb-D8FAF870-8359-4305-991D-0B81371C2EA1", 
+            "connectorId": "con_255", 
+            "connectorName": "con_255", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-CDB71D0D-A2D8-4130-A1E6-7218F1FDB92C", 
+            "sourceId": "jsPlumb-C6293DF9-5B60-4B1A-9BC8-2597AA68AC35", 
+            "connectorId": "con_260", 
+            "connectorName": "con_260", 
+            "connectorType": "data"
+        }
+    ]
+}

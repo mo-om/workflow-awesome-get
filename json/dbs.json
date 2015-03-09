@@ -1,0 +1,31 @@
+{
+    "dbs": [
+        {
+            "text": "default", 
+            "value": "default"
+        }, 
+        {
+            "text": "ganjun652_ind", 
+            "value": "ganjun652_ind"
+        }, 
+        {
+            "text": "gbd_360_mask", 
+            "value": "gbd_360_mask"
+        }, 
+        {
+            "text": "gbd_douban_safe", 
+            "value": "gbd_douban_safe"
+        }, 
+        {
+            "text": "social", 
+            "value": "social"
+        }, 
+        {
+            "text": "soufun", 
+            "value": "soufun"
+        }
+    ], 
+    "message": "Get dbs success", 
+    "total": 6, 
+    "success": true
+}

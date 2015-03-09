@@ -1,0 +1,5 @@
+/*!
+ * common.css
+ * @author mo-om
+ */
+html,body,iframe,div,ul,ol,li,p,h1,h2,h3,h4,h5,h6{margin:0;padding:0}img,iframe{border:0 none}ul,li{list-style:none}select,textarea,input,.input-type-text{outline:0}textarea{resize:none}img{vertical-align:top}a{outline:0}table{border-spacing:0;border-collapse:collapse}th{text-align:left}

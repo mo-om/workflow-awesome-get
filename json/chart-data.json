@@ -1,0 +1,29 @@
+{
+    "message": "Execute success!", 
+    "series": [
+        {
+            "name": "min", 
+            "data": [
+                0.434666666666
+            ]
+        }, 
+        {
+            "name": "mean", 
+            "data": [
+                0.434666666666
+            ]
+        }, 
+        {
+            "name": "max", 
+            "data": [ 
+                2.434666666666
+            ]
+        }
+    ], 
+    "chartTitle": "概要统计图", 
+    "yAxisTitle": "统计值", 
+    "categories": [
+        "1"
+    ], 
+    "success": true
+}

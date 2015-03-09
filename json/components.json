@@ -1,0 +1,76 @@
+{
+	"success": true,
+	"message": "if false return some error message",
+	"items": [
+		{
+			"type": "data-source",
+			"title": "数据源",
+			"subitems": [
+				{ "cmpWindow": true, "indegree": 0, "type":"hdfs-file", "iconCls":"fa-file-o", "desc":"HDFS分隔符文件读取组件", "input": "disable", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 0, "type":"hive-table", "iconCls":"fa-table", "desc":"Hive表组件", "input": "disable", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 0, "type":"sql", "iconCls":"fa-file-code-o", "desc":"SQL组件", "input": "disable", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 0, "type":"random-data", "iconCls":"fa-random", "desc":"随机数生成组件", "input": "disable", "output": "Data" }
+			]
+		},
+		{
+			"type": "pre-process",
+			"title": "数据预处理",
+			"subitems": [
+				{ "cmpWindow": true, "indegree": 1, "type":"stratified-sampling", "iconCls":"fa-flask", "desc":"分层抽样组件", "input": "Data", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 2, "type":"join", "iconCls":"fa-asterisk", "desc":"根据指定的列对两个数据集做join操作", "input": "Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 2, "type":"union", "iconCls":"fa-stethoscope", "desc":"对两个数据集做union操作", "input": "Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 2, "type":"cartesian", "iconCls":"fa-arrows", "desc":"对两个数据集做笛卡尔积操作", "input": "Data", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 1, "type":"select", "iconCls":"fa-check-square-o", "desc":"选择数据列", "input": "Data", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 1, "type":"filter", "iconCls":"fa-filter", "desc":"根据条件过滤数据", "input": "Data", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 1, "type":"sample", "iconCls":"fa-eyedropper", "desc":"随机抽样", "input": "Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 1, "type":"distinct", "iconCls":"fa-chain", "desc":"数据去重", "input": "Data", "output": "Data" }
+			]
+		},
+		{
+			"type": "mllib",
+			"title": "数据建模分析",
+			"subitems": [
+				{ "cmpWindow": true, "indegree": 1, "type":"logistic", "iconCls":"fa-exchange", "desc":"逻辑回归组件", "input": "Data", "output": "Classifier" },
+				{ "cmpWindow": true, "indegree": 1, "type":"svm", "iconCls":"fa-cube", "desc":"支持向量机组件", "input": "Data", "output": "Classifier" },
+				{ "cmpWindow": true, "indegree": 1, "type":"linear-regression", "iconCls":"fa-retweet", "desc":"线性回归组件", "input": "Data", "output": "Regressor" },
+				{ "cmpWindow": true, "indegree": 1, "type":"decision-tree", "iconCls":"fa-crosshairs", "desc":"决策树组件", "input": "Data", "output": "Tree" },
+				{ "cmpWindow": true, "indegree": 1, "type":"naive-bayes", "iconCls":"fa-unlink", "desc":"朴素贝叶斯组件", "input": "Data", "output": "Classifier" },
+				{ "cmpWindow": true, "indegree": 1, "type":"kmeans", "iconCls":"fa-tasks", "desc":"K-means聚类组件", "input": "Data", "output": "Clusters" },
+				{ "cmpWindow": true, "indegree": 1, "type":"als", "iconCls":"fa-filter", "desc":"ALS协同过滤组件", "input": "Data", "output": "Recommender" },
+				{ "cmpWindow": true, "indegree": 1, "type":"svd", "iconCls":"fa-sliders", "desc":"奇异值分解", "input": "Data", "output": "Vectors" },
+				{ "cmpWindow": true, "indegree": 1, "type":"pca", "iconCls":"fa-dot-circle-o", "desc":"主成分分析", "input": "Data", "output": "Data" },
+				{ "cmpWindow": true, "indegree": 1, "type":"statistics", "iconCls":"fa-pencil-square-o", "desc":"概要统计组件", "input": "Data", "output": "Statistic" },
+				{ "cmpWindow": true, "indegree": 1, "type":"groupby", "iconCls":"fa-gears", "desc":"分组统计组件", "input": "Data", "output": "Statistic" },
+				{ "cmpWindow": true, "indegree": 1, "type":"correlations", "iconCls":"fa-compass", "desc":"相关性分析组件", "input": "Data", "output": "CovData"  },
+				{ "cmpWindow": true, "indegree": 1, "type":"chisq-test", "iconCls":"fa-dashboard", "desc":"假设检验组件", "input": "Data", "output": "TestData" }
+			]
+		},
+		{
+			"type": "predict",
+			"title": "模型预测",
+			"subitems": [
+				{ "cmpWindow": false, "indegree": 2, "type":"classifier-predict", "iconCls":"fa-ioxhost", "desc":"分类器预测组件", "input": "Classifier|Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 2, "type":"regressor-predict", "iconCls":"fa-newspaper-o", "desc":"回归模型预测组件", "input": "Regressor|Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 2, "type":"tree-predict", "iconCls":"fa-share-square-o", "desc":"树模型预测组件", "input": "Tree|Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 2, "type":"clusters-predict", "iconCls":"fa-compress", "desc":"聚类模型预测组件", "input": "Clusters|Data", "output": "Data" },
+				{ "cmpWindow": false, "indegree": 2, "type":"recommender-predict", "iconCls":"fa-bookmark-o", "desc":"推荐模型预测组件", "input": "Recommender|Data", "output": "Data" }				
+			]
+		},
+		{
+			"type": "grid",
+			"title": "数据展示",
+			"subitems": [
+				{ "cmpWindow": true, "indegree": 1, "type":"table-display", "iconCls":"fa-list-alt", "desc":"表格展示", "input": "*", "output": "*" },
+				{ "cmpWindow": true, "indegree": 1, "type":"barplot-display", "iconCls":"fa-bar-chart", "desc":"柱状图展示", "input": "Statistic", "output": "Statistic" },
+				{ "cmpWindow": true, "indegree": 1, "type":"tree-display", "iconCls":"fa-sitemap", "desc":"树图展示", "input": "Tree", "output": "Tree" }
+			]
+		},
+		{
+			"type": "storage",
+			"title": "数据存储",
+			"subitems": [
+				{ "cmpWindow": true, "indegree": 1, "type":"hdfs-storage", "iconCls":"fa-database", "desc":"HDFS存储组件", "input": "*", "output": "disable" }
+			]
+		}
+	]
+}

@@ -1,0 +1,36 @@
+/** DISABLE TEXT SELECTION (SET ON BODY WHEN DRAGGING IS OCCURRING) **/
+._jsPlumb_drag_select * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+path, ._jsPlumb_endpoint { cursor:pointer; }
+
+
+/** Z-INDEX **/
+
+._jsPlumb_connector { z-index:18; }
+._jsPlumb_endpoint { z-index:19; }
+._jsPlumb_overlay { z-index:20; }
+
+.aLabel {
+  background-color:white; 
+  padding:0.4em; 
+  font:12px sans-serif; 
+  color:#444;
+  z-index:21;
+  border:1px dotted gray;
+  opacity:0.8;
+  filter:alpha(opacity=80);
+  cursor: pointer;
+}
+.aLabel._jsPlumb_hover {
+  background-color:#5C96BC;
+  color:white;  
+  border:1px solid white;
+}

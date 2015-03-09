@@ -1,0 +1,138 @@
+{
+    "nodes": [
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-D77FEEAD-D68A-4AB4-A303-02E5F3607D35", 
+            "nodeName": "jsPlumb-D77FEEAD-D68A-4AB4-A303-02E5F3607D35", 
+            "iconCls": "fa-file-o", 
+            "property": {
+                "cluster_address": "hdfs://dev-l002781.app.paic.com.cn:9000", 
+                "hdfs_path": "/tmp/test_spark/svd.data", 
+                "copies": "1", 
+                "splitor": "whitespace"
+            }, 
+            "nodeType": "hdfs-file", 
+            "input": "disable", 
+            "output": "Data", 
+            "indegree": 0, 
+            "parentType": "data-source", 
+            "nodePosTop": 300, 
+            "nodePosLeft": 260
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-8F377046-D761-4927-885D-7B73879B5CE2", 
+            "nodeName": "jsPlumb-8F377046-D761-4927-885D-7B73879B5CE2", 
+            "iconCls": "fa-sliders", 
+            "property": {
+                "singValueNum": "2", 
+                "computeU": "true", 
+                "rCond": "1e-9"
+            }, 
+            "nodeType": "svd", 
+            "input": "Data", 
+            "output": "Vectors", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 192, 
+            "nodePosLeft": 468
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-3ADD8E54-136B-434D-89E4-919E3A7C0C74", 
+            "nodeName": "jsPlumb-3ADD8E54-136B-434D-89E4-919E3A7C0C74", 
+            "iconCls": "fa-dot-circle-o", 
+            "property": {
+                "pcNum": "2"
+            }, 
+            "nodeType": "pca", 
+            "input": "Data", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 352, 
+            "nodePosLeft": 483
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-4813C971-E9EF-45F9-BFEF-A01CD4CA3B58", 
+            "nodeName": "jsPlumb-4813C971-E9EF-45F9-BFEF-A01CD4CA3B58", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 202, 
+            "nodePosLeft": 700
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-ECAFA2EC-FF48-405E-8614-29345335F7BE", 
+            "nodeName": "jsPlumb-ECAFA2EC-FF48-405E-8614-29345335F7BE", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 370, 
+            "nodePosLeft": 722
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-2837344E-CBC6-48AB-82DF-D72727DFD799", 
+            "nodeName": "jsPlumb-2837344E-CBC6-48AB-82DF-D72727DFD799", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 108, 
+            "nodePosLeft": 320
+        }
+    ], 
+    "processId": "PROCESS-4FDFFBB7-0E4B-4050-8743-2C23939BF793", 
+    "processName": "testPCAandSVD", 
+    "connections": [
+        {
+            "targetId": "jsPlumb-8F377046-D761-4927-885D-7B73879B5CE2", 
+            "sourceId": "jsPlumb-D77FEEAD-D68A-4AB4-A303-02E5F3607D35", 
+            "connectorId": "con_210", 
+            "connectorName": "con_210", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-3ADD8E54-136B-434D-89E4-919E3A7C0C74", 
+            "sourceId": "jsPlumb-D77FEEAD-D68A-4AB4-A303-02E5F3607D35", 
+            "connectorId": "con_215", 
+            "connectorName": "con_215", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-4813C971-E9EF-45F9-BFEF-A01CD4CA3B58", 
+            "sourceId": "jsPlumb-8F377046-D761-4927-885D-7B73879B5CE2", 
+            "connectorId": "con_220", 
+            "connectorName": "con_220", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-ECAFA2EC-FF48-405E-8614-29345335F7BE", 
+            "sourceId": "jsPlumb-3ADD8E54-136B-434D-89E4-919E3A7C0C74", 
+            "connectorId": "con_225", 
+            "connectorName": "con_225", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-2837344E-CBC6-48AB-82DF-D72727DFD799", 
+            "sourceId": "jsPlumb-D77FEEAD-D68A-4AB4-A303-02E5F3607D35", 
+            "connectorId": "con_230", 
+            "connectorName": "con_230", 
+            "connectorType": "data"
+        }
+    ]
+}

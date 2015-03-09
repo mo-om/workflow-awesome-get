@@ -1,0 +1,11 @@
+{
+	"success": true,
+	"total": "100",
+	"message": "if false return some error message",
+	"rows": [
+		{ "resource": "process-data-05.json", "processName": "process-x", "processId": "PROCESS-AACBE987-2A0F-4C93-B6A0-ADB811722CB1" },
+		{ "resource": "process-data-04.json", "processName": "process-y", "processId": "PROCESS-AACBE987-2A0F-4C93-B6A0-ADB811722CB2" },
+		{ "resource": "process-data-03.json", "processName": "process-z", "processId": "PROCESS-AACBE987-2A0F-4C93-B6A0-ADB811722CB3" },
+		{ "resource": "process-data-01.json", "processName": "PROCESS-AACBE987-2A0F-4C93-B6A0-ADB811722CB2", "processId": "PROCESS-AACBE987-2A0F-4C93-B6A0-ADB811722CB4" }
+	]
+}

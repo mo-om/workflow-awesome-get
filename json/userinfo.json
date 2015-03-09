@@ -1,0 +1,9 @@
+{
+	"success": true,
+	"message": "if false return some error message",
+	"userinfo": {
+		"username": "username",
+		"userrole": "userrole",
+		"otherProperty": "otherProperty"
+	}
+}

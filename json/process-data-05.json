@@ -1,0 +1,210 @@
+{
+    "nodes": [
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-B6642ED6-87D5-476B-BE48-BB08A8692045", 
+            "nodeName": "jsPlumb-B6642ED6-87D5-476B-BE48-BB08A8692045", 
+            "iconCls": "fa-file-o", 
+            "property": {
+                "cluster_address": "hdfs://dev-l002781.app.paic.com.cn:9000", 
+                "hdfs_path": "/tmp/test_spark/sample_linear_regression_data.txt", 
+                "copies": "1", 
+                "splitor": "whitespace"
+            }, 
+            "nodeType": "hdfs-file", 
+            "input": "disable", 
+            "output": "Data", 
+            "indegree": 0, 
+            "parentType": "data-source", 
+            "nodePosTop": 325, 
+            "nodePosLeft": 169
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-839116D9-055C-43D7-974E-91C87A25D6DB", 
+            "nodeName": "jsPlumb-839116D9-055C-43D7-974E-91C87A25D6DB", 
+            "iconCls": "fa-retweet", 
+            "property": {
+                "targetcol": "0", 
+                "trainRatio": "0.6", 
+                "optimizer": "SGD", 
+                "numIterations": "100", 
+                "stepSize": "1.0", 
+                "regParam": "0.0", 
+                "miniBatchFraction": "1.0", 
+                "numCorrections": "10", 
+                "convergenceTol": "1e-4", 
+                "updater": "SimpleUpdater", 
+                "gradient": "LeastSquaresGradient"
+            }, 
+            "nodeType": "linear-regression", 
+            "input": "Data", 
+            "output": "Regressor", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 259, 
+            "nodePosLeft": 428
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-2152C192-6867-43FA-840A-860BA2A20B2E", 
+            "nodeName": "jsPlumb-2152C192-6867-43FA-840A-860BA2A20B2E", 
+            "iconCls": "fa-retweet", 
+            "property": {
+                "targetcol": "0", 
+                "trainRatio": "0.6", 
+                "optimizer": "SGD", 
+                "numIterations": "100", 
+                "stepSize": "1.0", 
+                "regParam": "0.0", 
+                "miniBatchFraction": "1.0", 
+                "numCorrections": "10", 
+                "convergenceTol": "1e-4", 
+                "updater": "L1Updater", 
+                "gradient": "LeastSquaresGradient"
+            }, 
+            "nodeType": "linear-regression", 
+            "input": "Data", 
+            "output": "Regressor", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 362, 
+            "nodePosLeft": 411
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-61EEDCF5-EA28-4A2D-A310-4395CFB8FCCE", 
+            "nodeName": "jsPlumb-61EEDCF5-EA28-4A2D-A310-4395CFB8FCCE", 
+            "iconCls": "fa-retweet", 
+            "property": {
+                "targetcol": "0", 
+                "trainRatio": "0.6", 
+                "optimizer": "SGD", 
+                "numIterations": "100", 
+                "stepSize": "1.0", 
+                "regParam": "0.0", 
+                "miniBatchFraction": "1.0", 
+                "numCorrections": "10", 
+                "convergenceTol": "1e-4", 
+                "updater": "SquaredL2Updater", 
+                "gradient": "LeastSquaresGradient"
+            }, 
+            "nodeType": "linear-regression", 
+            "input": "Data", 
+            "output": "Regressor", 
+            "indegree": 1, 
+            "parentType": "mllib", 
+            "nodePosTop": 495, 
+            "nodePosLeft": 402
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-2674C9EA-558A-4D8E-8EA1-F5EDB31E07A7", 
+            "nodeName": "jsPlumb-2674C9EA-558A-4D8E-8EA1-F5EDB31E07A7", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 245, 
+            "nodePosLeft": 639
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-445068A2-4F73-4F96-8379-E6368D526EF9", 
+            "nodeName": "jsPlumb-445068A2-4F73-4F96-8379-E6368D526EF9", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 359, 
+            "nodePosLeft": 668
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-FD6D608B-8068-48BE-93F4-EBCF4538923A", 
+            "nodeName": "jsPlumb-FD6D608B-8068-48BE-93F4-EBCF4538923A", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 510, 
+            "nodePosLeft": 628
+        }, 
+        {
+        	"cmpWindow": true,
+            "nodeId": "jsPlumb-35975418-4C9C-4675-88AD-779B9F9A20C5", 
+            "nodeName": "jsPlumb-35975418-4C9C-4675-88AD-779B9F9A20C5", 
+            "iconCls": "fa-list-alt", 
+            "property": { }, 
+            "nodeType": "table-display", 
+            "input": "*", 
+            "output": "Data", 
+            "indegree": 1, 
+            "parentType": "grid", 
+            "nodePosTop": 104, 
+            "nodePosLeft": 427
+        }
+    ], 
+    "processId": "PROCESS-B36CB348-5935-4602-9ED1-126456AC8B81", 
+    "processName": "testRegression", 
+    "connections": [
+        {
+            "targetId": "jsPlumb-839116D9-055C-43D7-974E-91C87A25D6DB", 
+            "sourceId": "jsPlumb-B6642ED6-87D5-476B-BE48-BB08A8692045", 
+            "connectorId": "con_265", 
+            "connectorName": "con_265", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-2152C192-6867-43FA-840A-860BA2A20B2E", 
+            "sourceId": "jsPlumb-B6642ED6-87D5-476B-BE48-BB08A8692045", 
+            "connectorId": "con_270", 
+            "connectorName": "con_270", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-61EEDCF5-EA28-4A2D-A310-4395CFB8FCCE", 
+            "sourceId": "jsPlumb-B6642ED6-87D5-476B-BE48-BB08A8692045", 
+            "connectorId": "con_275", 
+            "connectorName": "con_275", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-2674C9EA-558A-4D8E-8EA1-F5EDB31E07A7", 
+            "sourceId": "jsPlumb-839116D9-055C-43D7-974E-91C87A25D6DB", 
+            "connectorId": "con_280", 
+            "connectorName": "con_280", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-445068A2-4F73-4F96-8379-E6368D526EF9", 
+            "sourceId": "jsPlumb-2152C192-6867-43FA-840A-860BA2A20B2E", 
+            "connectorId": "con_285", 
+            "connectorName": "con_285", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-FD6D608B-8068-48BE-93F4-EBCF4538923A", 
+            "sourceId": "jsPlumb-61EEDCF5-EA28-4A2D-A310-4395CFB8FCCE", 
+            "connectorId": "con_290", 
+            "connectorName": "con_290", 
+            "connectorType": "data"
+        }, 
+        {
+            "targetId": "jsPlumb-35975418-4C9C-4675-88AD-779B9F9A20C5", 
+            "sourceId": "jsPlumb-B6642ED6-87D5-476B-BE48-BB08A8692045", 
+            "connectorId": "con_295", 
+            "connectorName": "con_295", 
+            "connectorType": "data"
+        }
+    ]
+}

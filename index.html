@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<title>wellcome to webapp@workflow-awesome</title>
+    <link type="text/css" rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css?v=1.0.1.1">
+    <link type="text/css" rel="stylesheet" href="plugins/codemirror/lib/codemirror.css?v=1.0.1">
+    <link type="text/css" rel="stylesheet" href="plugins/codemirror/addon/hint/show-hint.css?v=1.0.1">
+    <link type="text/css" rel="stylesheet" href="css/reset.css?v=1.0.1">
+    <link type="text/css" rel="stylesheet" href="css/icon.css?v=1.0.1">
+    <link type="text/css" rel="stylesheet" href="css/common.css?v=1.0.1">
+</head>
+<body>
+    <div class="normal-content trs-all">
+    	<div class="topbar pos-fixed clearfix" id="topbar">
+    		<div class="logo fl">
+                <a hidefocus href="javascript:;">webapp@workflow-awesome</a>
+            </div>
+            <!-- <div class="fa fa-bars fr nav-handler"></div> -->
+            <ul class="nav fr clearfix">
+                <li><a href="pdf/webapp@workflow-awesome-usage.pdf" id="help" target="blank">如何使用</a></li>
+                <li><a href="javascript:;" id="new-process">新建流程</a></li>
+                <li><a href="javascript:;" id="save-process">保存流程</a></li>
+                <li><a href="javascript:;" id="save-process-as">存为副本</a></li>
+                <li><a href="javascript:;" id="open-process-list">打开流程</a></li>
+            </ul>
+            <div class="fr userinfo">
+                <a href="javascript:;" id="username" class="username"></a>
+                <span class="split-line">|</span>
+                <a href="user/logout" id="logout" class="logout">退出</a>
+            </div>
+    	</div>
+
+    	<div class="aside disable-select">
+    		<div class="aside-tbar ui-bar search-bar">
+    			<h1>应用组件</h1>
+    		</div>
+    		<div class="items components pos-abs" id="cmp-items">
+                
+    		</div>
+    		<div class="aside-split"></div>
+    	</div>
+
+    	<div class="content disable-select pos-rel">
+            <div class="space-top"></div>
+            <h1 class="process-title ui-bar tac">process.<span id="process-title">untitled</span></h1>
+    		<div class="process-area pos-abs" id="process-area"></div>
+    	</div>
+    </div>
+
+    <div class="mask trs-all"></div>
+
+    <div class="cmp-window trs-all" data-type="hdfs-file" id="window-hdfs-file">
+        <form method="post" data-type="hdfs-file" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="65">集群地址</td>
+                            <td><input class="ui-input trs-all" type="text" name="cluster_address"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">hdfs路径</td>
+                            <td><input class="ui-input trs-all" type="text" name="hdfs_path"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">分区数</td>
+                            <td><input class="ui-input trs-all" type="text" name="copies" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">分隔符</td>
+                            <td>
+                                <select class="ui-input trs-all" name="splitor">
+                                    <option value="">请选择</option>
+                                    <option value="tsv" selected>Tab</option>
+                                    <option value="csv">\u0001</option>
+                                    <option value="ctrla">逗号</option>
+                                    <option value="whitespace">空格</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">首行为标题</td>
+                            <td>
+                                <select class="ui-input trs-all" name="contain_head">
+                                    <option value="">请选择</option>
+                                    <option value="false" selected>false</option>
+                                    <option value="true">true</option>                           
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all" data-type="hive-table" id="window-hive-table">
+        <form method="post" data-type="hive-table" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="50">数据库名</td>
+                            <td>
+                                <select class="ui-input trs-all dbs" name="db_name" id="hive-table-dbs">
+                                    
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">表名</td>
+                            <td>
+                                <select class="ui-input trs-all" name="dt_name" data-belong-to="hive-table-dbs">
+                                    
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all" data-type="sql" id="window-sql" style="width:1000px;margin-left:-500px">
+        <form method="post" data-type="sql" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <div class="clearfix">
+                        <table class="field-table fl" style="width:400px;">
+                            <tr>
+                                <td class="tar" width="50">数据库名</td>
+                                <td>
+                                    <select class="ui-input trs-all dbs" name="db_name" id="sql-dbs">
+                                        
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr style="display:none">
+                                <td class="tar">表名</td>
+                                <td>
+                                    <select class="ui-input trs-all" name="dt_name" data-belong-to="sql-dbs">
+                                        
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="field-tips" style="margin-left:412px;">
+                            <div class="field-tips-item trs-all" data-tips-for="db_name">数据库名：若sql语句中没有指定数据库，则使用该参数指定的数据库。</div>
+                        </div>
+                    </div>
+                    <table class="field-table" style="table-layout: fixed;">
+                        <tr>
+                            <td class="tar vot" width="50" style="width:50px;">SQL语句</td>
+                            <td class="vot">
+                                <textarea rows="5" class="ui-input trs-all vot" id="sql-editor" name="sql_statement" data-type="codemirror" placeholder="一条SQL语句请以';'结束。若书写多条SQL语句，则最终返回的数据为最后一条SQL语句执行的结果。若SQL语句中包含CREATE，ALTER等修改hive元数据的操作，请将这些语句作为单独的任务来执行。"></textarea>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="random-data" id="window-random-data">
+        <form method="post" data-type="random-data" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">随机数分布</td>
+                            <td>
+                                <select class="ui-input trs-all method" name="method">
+                                    <option value="">请选择</option>
+                                    <option value="normal" selected>正态分布</option>
+                                    <option value="uniform">均匀分布</option>
+                                    <option value="poisson">泊松分布</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">随机数个数</td>
+                            <td><input class="ui-input trs-all" type="text" name="nums" value="10000"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">分区数</td>
+                            <td><input class="ui-input trs-all" type="text" name="partitions" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">随机种子</td>
+                            <td><input class="ui-input trs-all" type="text" name="seed" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">平均值</td>
+                            <td><input class="ui-input trs-all" type="text" name="mean" value="0" data-associate-value="normal"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">sigma</td>
+                            <td><input class="ui-input trs-all" type="text" name="sigma" value="1" data-associate-value="normal"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">区间起点</td>
+                            <td><input class="ui-input trs-all" type="text" name="rangeStart" value="0" data-associate-value="uniform"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">区间终点</td>
+                            <td><input class="ui-input trs-all" type="text" name="rangeEnd" value="1" data-associate-value="uniform"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">lambda</td>
+                            <td><input class="ui-input trs-all" type="text" name="lambda" value="1"  data-associate-value="poisson"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="seed">随机种子：值为0时，将使用一个随机的长整数作为随机种子。
+                    </div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+	<div class="cmp-window trs-all with-field-tips" data-type="select" id="window-select">
+        <form method="post" data-type="select" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="55">选择列号</td>
+                            <td><input class="ui-input select-input trs-all" type="text" name="selectCols"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">排除列号</td>
+                            <td><input class="ui-input select-input trs-all" type="text" name="removeCols"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="selectCols">选择列号：列号从0开始。若选择多列，请在列号之间用','分割。
+                    </div>
+                    <div class="field-tips-item trs-all" data-tips-for="removeCols">排除列号：列号从0开始。若排除多列，请在列号之间用','分割。排除列号和选择列号不能同时使用！
+                    </div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="cmp-window trs-all with-field-tips" data-type="filter" id="window-filter">
+        <form method="post" data-type="filter" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="60">过滤列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetCol"></td>
+                        </tr>
+                    </table>
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="60">过滤条件</td>
+                            <td>
+                                <select class="ui-input trs-all" name="filterCond">
+                                    <option value="">请选择</option>
+                                    <option value="gt">大于</option>
+                                    <option value="lt">小于</option> 
+                                    <option value="eq" selected>等于</option>
+                                    <option value="neq">不等于</option>
+                                    <option value="gte">大于等于</option>
+                                    <option value="lte">小于等于</option>                      
+                                </select>
+                            </td>
+                            <td><input class="ui-input trs-all" type="text" name="filterValue"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetCol">过滤列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="filterValue">过滤条件：若属性为非数值，仅能使用"等于"和"不等于"</div>
+                </div>     
+            </div>           
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="cmp-window trs-all" data-type="sample" id="window-sample">
+        <form method="post" data-type="sample" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="75">抽样比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="fraction"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">是否放回抽样</td>
+                            <td>
+                                <select class="ui-input trs-all" name="withReplacement">
+                                    <option value="">请选择</option>
+                                    <option value="false" selected>false</option>
+                                    <option value="true">true</option>                           
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>         
+            </div>           
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="cmp-window trs-all with-field-tips" data-type="groupby" id="window-groupby">
+        <form method="post" data-type="groupby" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="75">分组属性列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="keyCol"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">统计属性列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="valueCol"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">统计方法</td>
+                            <td>
+                                <select class="ui-input trs-all" name="method">
+                                    <option value="">请选择</option>
+                                    <option value="sum" selected>求和</option>
+                                    <option value="average">求平均值</option> 
+                                    <option value="count">计数</option>                           
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="keyCol">分组属性列号：列号从0开始</div>
+                </div>         
+            </div>           
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all" data-type="statistics" id="window-statistics">
+        <form method="post" data-type="statistics" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="50">最大值</td>
+                            <td>
+                                <select class="ui-input trs-all" name="max">
+                                    <option value="">请选择</option>
+                                    <option value="true" selected>统计</option>
+                                    <option value="false">不统计</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">最小值</td>
+                            <td>
+                                <select class="ui-input trs-all" name="min">
+                                    <option value="">请选择</option>
+                                    <option value="true" selected>统计</option>
+                                    <option value="false">不统计</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">平均值</td>
+                            <td>
+                                <select class="ui-input trs-all" name="mean">
+                                    <option value="">请选择</option>
+                                    <option value="true" selected>统计</option>
+                                    <option value="false">不统计</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">方差</td>
+                            <td>
+                                <select class="ui-input trs-all" name="variance">
+                                    <option value="">请选择</option>
+                                    <option value="true" selected>统计</option>
+                                    <option value="false">不统计</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">非零个数</td>
+                            <td>
+                                <select class="ui-input trs-all" name="numNonzeros">
+                                    <option value="">请选择</option>
+                                    <option value="true" selected>统计</option>
+                                    <option value="false">不统计</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="logistic" id="window-logistic">
+        <form method="post" data-type="logistic" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">标签列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetcol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">训练集比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="trainRatio" value="0.6"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">优化器</td>
+                            <td>
+                                <select class="ui-input trs-all optimizer" name="optimizer">
+                                    <option value="">请选择</option>
+                                    <option value="SGD" selected>SGD</option>
+                                    <option value="L-BFGS">L-BFGS</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">迭代次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numIterations" value="100"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">正则参数</td>
+                            <td><input class="ui-input trs-all" type="text" name="stepSize" value="1.0" data-associate-value="SGD"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">初始步长</td>
+                            <td><input class="ui-input trs-all" type="text" name="regParam" value="0.0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">数据比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="miniBatchFraction" value="1.0" data-associate-value="SGD"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">校正次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numCorrections" value="10" data-associate-value="L-BFGS"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">收敛偏差</td>
+                            <td><input class="ui-input trs-all" type="text" name="convergenceTol" value="1e-4" data-associate-value="L-BFGS"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">权重更新</td>
+                            <td>
+                                <select class="ui-input trs-all" name="updater" data-associate-value="optimizer">
+                                    <option value="">请选择</option>
+                                    <option value="SimpleUpdater" selected>SimpleUpdater</option>
+                                    <option value="L1Updater">L1Updater</option>
+                                    <option value="SquaredL2Updater">SquaredL2Updater</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">随机梯度</td>
+                            <td>
+                                <select class="ui-input trs-all" name="gradient">
+                                    <option value="">请选择</option>
+                                    <option value="LogisticGradient" selected>LogisticGradient</option>
+                                    <option value="LeastSquaresGradient">LeastSquaresGradient</option>
+                                    <option value="HingeGradient">HingeGradient</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetcol">标签列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="convergenceTol">收敛偏差：该字段可使用科学计数法表示(例如：1e-8表示0.00000001，请填写正确的科学计数法)</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="svm" id="window-svm">
+        <form method="post" data-type="svm" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">标签列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetcol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">训练集比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="trainRatio" value="0.6"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">优化器</td>
+                            <td>
+                                <select class="ui-input trs-all optimizer" name="optimizer">
+                                    <option value="">请选择</option>
+                                    <option value="SGD" selected>SGD</option>
+                                    <option value="L-BFGS">L-BFGS</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">迭代次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numIterations" value="100"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">正则参数</td>
+                            <td><input class="ui-input trs-all" type="text" name="stepSize" value="1.0" data-associate-value="SGD"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">初始步长</td>
+                            <td><input class="ui-input trs-all" type="text" name="regParam" value="0.0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">数据比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="miniBatchFraction" value="1.0" data-associate-value="SGD"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">校正次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numCorrections" value="10" data-associate-value="L-BFGS"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">收敛偏差</td>
+                            <td><input class="ui-input trs-all" type="text" name="convergenceTol" value="1e-4" data-associate-value="L-BFGS"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">权重更新</td>
+                            <td>
+                                <select class="ui-input trs-all" name="updater" data-associate-value="optimizer">
+                                    <option value="">请选择</option>
+                                    <option value="SimpleUpdater" selected>SimpleUpdater</option>
+                                    <option value="L1Updater">L1Updater</option>
+                                    <option value="SquaredL2Updater">SquaredL2Updater</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">随机梯度</td>
+                            <td>
+                                <select class="ui-input trs-all" name="gradient">
+                                    <option value="">请选择</option>
+                                    <option value="LogisticGradient">LogisticGradient</option>
+                                    <option value="LeastSquaresGradient">LeastSquaresGradient</option>
+                                    <option value="HingeGradient" selected>HingeGradient</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetcol">标签列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="convergenceTol">收敛偏差：该字段可使用科学计数法表示(例如：1e-8表示0.00000001，请填写正确的科学计数法)</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="linear-regression" id="window-linear-regression">
+        <form method="post" data-type="linear-regression" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">标签列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetcol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">训练集比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="trainRatio" value="0.6"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">优化器</td>
+                            <td>
+                                <select class="ui-input trs-all optimizer" name="optimizer">
+                                    <option value="">请选择</option>
+                                    <option value="SGD" selected>SGD</option>
+                                    <option value="L-BFGS">L-BFGS</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">迭代次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numIterations" value="100"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">正则参数</td>
+                            <td><input class="ui-input trs-all" type="text" name="stepSize" value="1.0" data-associate-value="SGD"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">初始步长</td>
+                            <td><input class="ui-input trs-all" type="text" name="regParam" value="0.0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">数据比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="miniBatchFraction" value="1.0" data-associate-value="SGD"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">校正次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numCorrections" value="10" data-associate-value="L-BFGS"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">收敛偏差</td>
+                            <td><input class="ui-input trs-all" type="text" name="convergenceTol" value="1e-4" data-associate-value="L-BFGS"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">权重更新</td>
+                            <td>
+                                <select class="ui-input trs-all" name="updater" data-associate-value="optimizer">
+                                    <option value="">请选择</option>
+                                    <option value="SimpleUpdater" selected>SimpleUpdater</option>
+                                    <option value="L1Updater">L1Updater</option>
+                                    <option value="SquaredL2Updater">SquaredL2Updater</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">随机梯度</td>
+                            <td>
+                                <select class="ui-input trs-all" name="gradient">
+                                    <option value="">请选择</option>
+                                    <option value="LogisticGradient">LogisticGradient</option>
+                                    <option value="LeastSquaresGradient" selected>LeastSquaresGradient</option>
+                                    <option value="HingeGradient">HingeGradient</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetcol">标签列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="convergenceTol">收敛偏差：该字段可使用科学计数法表示(例如：1e-8表示0.00000001，请填写正确的科学计数法)</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="correlations" id="window-correlations">
+        <form method="post" data-type="correlations" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="80">X属性列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="xcol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar" width="80">Y属性列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="ycol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar" width="80">相关性类型</td>
+                            <td>
+                                <select class="ui-input trs-all" name="correType">
+                                        <option value="">请选择</option>
+                                        <option value="pearson" selected>pearson</option>
+                                        <option value="spearman">spearman</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="xcol">X属性列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="xcol">若X列和Y列均为0，则计算所有属性的相关矩阵.</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="chisq-test" id="window-chisq-test">
+        <form method="post" data-type="chisq-test" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="80">目标列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetCol" value="0"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item" data-tips-for="targetCol">列号从0开始。每个属性分别与目标特征进行卡方独立性检验.</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="stratified-sampling" id="window-stratified-sampling">
+        <form method="post" data-type="stratified-sampling" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="80">抽样列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="keyCol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">抽样比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="fractions"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">精准抽样</td>
+                            <td>
+                                <select class="ui-input trs-all" name="isExact">
+                                    <option value="">请选择</option>
+                                    <option value="true">true</option>
+                                    <option value="false" selected>false</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">是否放回抽样</td>
+                            <td>
+                                <select class="ui-input trs-all" name="withReplacement">
+                                    <option value="">请选择</option>
+                                    <option value="true">true</option>
+                                    <option value="false" selected>false</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="keyCol">抽样列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="fractions">抽样比例：为属性值指定抽样比例，属性值和比例之间用","分割，不同属性之间用";"分割，如man,0.3;woman,0.5</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="decision-tree" id="window-decision-tree">
+        <form method="post" data-type="decision-tree" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="80">树类型</td>
+                            <td>
+                                <select class="ui-input trs-all treeType" name="treeType">
+                                    <option value="">请选择</option>
+                                    <option value="Classification" selected>分类树</option>
+                                    <option value="Regression">回归树</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">标签列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetCol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">分类个数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numClasses" value="2" data-associate-value="Classification"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">不纯度测量</td>
+                            <td>
+                                <select class="ui-input trs-all impurity" name="impurity" data-associate-value="treeType">
+                                        <option value="">请选择</option>
+                                        <option value="gini" selected>Gini不纯度</option>
+                                        <option value="entropy">熵</option>
+                                        <option value="variance">方差</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">树最大深度</td>
+                            <td><input class="ui-input trs-all" type="text" name="maxDepth" value="4"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">特征分箱数</td>
+                            <td><input class="ui-input trs-all" type="text" name="maxBins" value="100"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar vot">类别特征描述</td>
+                            <td class="vot"><textarea class="ui-input trs-all vot" name="categoricalFeaturesInfo"></textarea></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetCol">标签列号：列号从0开始</div>
+                    <div class="field-tips-item trs-all" data-tips-for="categoricalFeaturesInfo">类别特征描述：若为空，表示所有特征均为连续数值。若存在类别特征，可以使用n,k进行配置，表示第n列特征有k个分类，且编号为0,1...k-1。若存在多个类别特征，则在每个特征描述之间用";"分割</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="naive-bayes" id="window-naive-bayes">
+        <form method="post" data-type="naive-bayes" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">标签列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetCol" value="0"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">训练集比例</td>
+                            <td><input class="ui-input trs-all" type="text" name="trainRatio" value="0.6"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">lambda</td>
+                            <td><input class="ui-input trs-all" type="text" name="lambda" value="1.0"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetCol">标签列号：列号从0开始</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="kmeans" id="window-kmeans">
+        <form method="post" data-type="kmeans" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">聚类个数</td>
+                            <td><input class="ui-input trs-all" type="text" name="k" value="2"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">迭代次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="maxIterations" value="20"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">初始化模式</td>
+                            <td>
+                                <select class="ui-input trs-all" name="initializationMode">
+                                    <option value="">请选择</option>
+                                    <option value="k-means||" selected>k-means||</option>
+                                    <option value="entropy">random</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">计算次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="runs" value="1"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">初始化步数</td>
+                            <td><input class="ui-input trs-all" type="text" name="initializationSteps" value="5"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">收敛阀值</td>
+                            <td><input class="ui-input trs-all" type="text" name="epsilon" value="1e-4"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="epsilon">收敛阀值：该字段可使用科学计数法表示(例如：1e-8表示0.00000001，请填写正确的科学计数法)</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="als" id="window-als">
+        <form method="post" data-type="als" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="80">分块个数</td>
+                            <td><input class="ui-input trs-all" type="text" name="numBlocks" value="-1"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">隐语义因子数</td>
+                            <td><input class="ui-input trs-all" type="text" name="rank" value="10"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">迭代次数</td>
+                            <td><input class="ui-input trs-all" type="text" name="iterations" value="10"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">正则化参数</td>
+                            <td><input class="ui-input trs-all" type="text" name="lambda" value="0.01"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">隐性反馈</td>
+                            <td>
+                                <select class="ui-input trs-all" name="implicitPrefs">
+                                    <option value="">请选择</option>
+                                    <option value="false" selected>false</option>
+                                    <option value="true">true</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">偏好强度基准</td>
+                            <td><input class="ui-input trs-all" type="text" name="alpha" value="1.0"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="numBlocks">分块个数：-1表示自动配置</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all with-field-tips" data-type="svd" id="window-svd">
+        <form method="post" data-type="svd" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">奇异值个数</td>
+                            <td><input class="ui-input trs-all" type="text" name="singValueNum"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">计算U</td>
+                            <td>
+                                <select class="ui-input trs-all" name="computeU">
+                                    <option value="">请选择</option>
+                                    <option value="true" selected>true</option>
+                                    <option value="false">false</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tar">条件数导数</td>
+                            <td><input class="ui-input trs-all" type="text" name="rCond" value="1e-9"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="rCond">条件数导数：该字段可使用科学计数法表示(例如：1e-8表示0.00000001，请填写正确的科学计数法)</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all" data-type="pca" id="window-pca">
+        <form method="post" data-type="pca" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">主成分个数</td>
+                            <td><input class="ui-input trs-all" type="text" name="pcNum"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+    
+    <div class="cmp-window trs-all with-field-tips" data-type="join" id="window-join">
+        <form method="post" data-type="join" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content clearfix">
+                <div class="field fl">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">联接列号</td>
+                            <td><input class="ui-input trs-all" type="text" name="targetCol"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="field-tips">
+                    <div class="field-tips-item trs-all" data-tips-for="targetCol">联接列号：列号从0开始。</div>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all cmp-grid-window" data-type="table-display" id="window-table-display">
+        <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+        <h1 class="cmp-window-header"></h1>
+        <div class="cmp-window-content">
+            <div class="cmp-grid-container close-to-empty"></div>
+        </div>
+        <div class="cmp-window-buttons tac">
+            <a hidefocus class="cmp-window-button get-grid-data" href="javascript:;">执行</a>
+        </div>
+    </div>
+
+    <div class="cmp-window trs-all cmp-chart-window" data-type="barplot-display" id="window-barplot-display">
+        <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+        <h1 class="cmp-window-header"></h1>
+        <div class="cmp-window-content">
+            <div class="cmp-chart-container close-to-empty"></div>
+        </div>
+        <div class="cmp-window-buttons tac">
+            <a hidefocus class="cmp-window-button get-chart-data" href="javascript:;">执行</a>
+        </div>
+    </div>
+
+    <div class="cmp-window with-display-content trs-all" data-type="tree-display" id="window-tree-display">
+        <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+        <h1 class="cmp-window-header"></h1>
+        <div class="cmp-window-content">
+            <table style="width:100%;height:100%">
+                <tr>
+                    <td>
+                        <div class="cmp-pic-container close-to-empty"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="cmp-window-buttons tac">
+            <a hidefocus class="cmp-window-button get-tree-pic" href="javascript:;">执行</a>
+        </div>
+    </div>
+
+    <div class="cmp-window trs-all" data-type="hdfs-storage" id="window-hdfs-storage">
+        <form method="post" data-type="hdfs-storage" action="">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header"></h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">集群地址</td>
+                            <td><input class="ui-input trs-all" type="text" name="cluster_address"></td>
+                        </tr>
+                        <tr>
+                            <td class="tar">hdfs路径</td>
+                            <td><input class="ui-input trs-all" type="text" name="hdfs_path"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="execute" href="javascript:;">执行</a>
+                <a hidefocus class="ok" href="javascript:;">应用</a>
+                <a hidefocus class="cancel" href="javascript:;">放弃</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="cmp-window trs-all" id="process-name-window" style="margin: -78px 0 0 -213px;">
+        <form method="post" action="" data-type="process-form">
+            <a hidefocus class="x fa fa-close trs-all" href="javascript:;"></a>
+            <h1 class="cmp-window-header">保存流程</h1>
+            <div class="cmp-window-content">
+                <div class="field">
+                    <table class="field-table">
+                        <tr>
+                            <td class="tar" width="70">流程名称</td>
+                            <td>
+                                <input class="ui-input trs-all" type="text" id="process-name" name="processName">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="cmp-window-buttons tac">
+                <a hidefocus class="save-process-btn" id="post-process-data" href="javascript:;">保存</a>
+                <a hidefocus class="cancel-process-btn cancel" href="javascript:;">取消</a>
+            </div>
+        </form>
+    </div>
+
+    <div class="collapse-panel process-list-panel pos-fixed trs-all" id="process-list-panel">
+        <div class="process-list-panel-header operators clearfix">
+            <input type="text" class="filter trs-all fl" placeholder="输入关键字以检索">
+            <div class="fr operator-buttons">
+                <a hidefocus href="javascript:;" class="s-btn remove-btn">删除</a>
+                <a hidefocus href="javascript:;" class="s-btn cancel-btn">退出</a>
+                <a hidefocus href="javascript:;" class="f-btn refresh-btn">刷新</a>
+                <a hidefocus href="javascript:;" class="f-btn operating-btn">管理</a>
+            </div>
+        </div>
+        <div class="process-list-panel-body pos-abs">
+            <div class="operating-mode">
+                <div class="operating-mode-bar pos-rel">
+                    已进入管理模式
+                    <input class="toggle-check checkbox pos-abs" type="checkbox">
+                </div>
+            </div>
+            <ul class="process-list" id="process-list"></ul>
+        </div>
+    </div>
+    <div id="waiting" class="waiting tac"><span class="waiting-info"></span></div>
+    <div class="overlayer pos-fixed clearfix">
+        <div class=""></div>
+        <div class="sidebar pos-abs">
+            <ul class="">
+                <li><span class="fa fa-file"></span>新建</li>
+                <li><span class="fa fa-folder-open"></span>打开</li>
+                <li><span class="fa fa-save"></span>保存</li>
+                <li><span class="fa fa-paste"></span>另存为</li>
+                <li><span class="fa fa-question-circle"></span>如何使用</li>
+            </ul>
+        </div>
+    </div>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="js/lt-ie9.js"></script>
+    <![endif]-->
+    <script id="entry" type="text/javascript" src="js/util.js?v=1.0.1"></script>
+</body>
+</html>
